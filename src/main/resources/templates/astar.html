@@ -7,46 +7,29 @@
     <style>
         body {
             display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: flex-start;
-            font-family: Arial, sans-serif;
-            height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-
-        /* Styling for the heading */
-        h1 {
-            color: rgb(34, 139, 34); /* Customize your color here */
-            font-size: 2em;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        /* Controls: buttons and inputs */
-        #controls {
-            display: flex;
             flex-direction: column;
             align-items: center;
-            margin-right: 20px;
+            font-family: Arial, sans-serif;
         }
 
-        /* Grid container */
+        /* Grid styles */
         #grid {
             display: grid;
             grid-template-columns: repeat(20, 30px);
             grid-template-rows: repeat(20, 30px);
             gap: 2px;
         }
-
-        /* Cell styling with bold black border */
         .cell {
             width: 30px;
             height: 30px;
-            border: 2px solid black; /* Increased the border width and changed color to black */
+            border: 2px solid black;
         }
-
+h1 {
+  color:  rgb(149, 69, 53)  ; 
+font-size: 2em; 
+  text-align: center; 
+  margin-bottom: 20px; 
+}  
         .start { background-color: blue; }
         .target { background-color: red; }
         .wall { background-color: black; }
@@ -63,7 +46,7 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.3s ease;
-            margin: 10px 0;
+            margin: 10px; /* Add margin to separate buttons */
         }
 
         .visualize-btn:hover {
@@ -76,19 +59,28 @@
             transform: scale(0.95);
         }
 
-        /* Input label and controls */
-        label, input[type="range"], input[type="checkbox"] {
-            margin: 10px 0;
+        /* Controls container */
+        #controls {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Other controls */
+        label {
+            margin-left: 10px;
+        }
+
+        input[type="range"] {
+            margin-left: 10px;
         }
 
     </style>
 </head>
 <body>
 
-    <!-- Heading for the visualization -->
     <h1>A* Pathfinding Visualization</h1>
 
-    <!-- Controls section for buttons and inputs -->
+    <!-- Controls -->
     <div id="controls">
         <button id="startBtn" class="visualize-btn">Start A*</button>
         <button id="resetBtn" class="visualize-btn">Reset Grid</button>
@@ -105,7 +97,7 @@
         <input type="checkbox" id="allowDiagonals"> Allow Diagonal Movement
     </div>
 
-    <!-- Grid container -->
+    <!-- Grid -->
     <div id="grid"></div>
 
     <script src="js/astar.js"></script>
