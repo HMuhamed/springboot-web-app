@@ -1,4 +1,4 @@
-FROM FROM openjdk:8 AS build
+FROM openjdk:8 AS build
 COPY . .
 RUN mvn clean package -DskipTests
 
