@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let startNode = null;
     let targetNode = null;
 
+    let isMouseDown = false; // Track whether the mouse is held down
+    let toggleWallState = null; // Track if we're adding or removing walls
+
     // Render the initial grid
     renderGrid(grid, gridElement);
 
@@ -102,21 +105,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (node.isPath && !node.isStart && !node.isTarget) cell.classList.add('path');
 
                 // Add interaction to set start, target, or walls
-                cell.addEventListener('click', () => {
-                    if (!startNode) {
-                        node.isStart = true;
-                        startNode = node;
-                    } else if (!targetNode) {
-                        node.isTarget = true;
-                        targetNode = node;
-                    } else if (!node.isStart && !node.isTarget) {
-                        node.isWall = !node.isWall;
+                cell.addEventListener('mousedown', (event) => {
+                    if (event.button === 0) { // Check if the left mouse button is pressed
+                        isMouseDown = true;
+                        if (!startNode) {
+                            node.isStart = true;
+                            startNode = node;
+                        } else if (!targetNode) {
+                            node.isTarget = true;
+                            targetNode = node;
+                        } else if (!node.isStart && !node.isTarget) {
+                            toggleWallState = !node.isWall; // Track the action (add or remove walls)
+                            node.isWall = toggleWallState;
+                        }
+                        renderGrid(grid, gridElement);
                     }
-                    renderGrid(grid, gridElement);
+                });
+
+                cell.addEventListener('mouseover', () => {
+                    if (isMouseDown && event.button === 0 && !node.isStart && !node.isTarget) {
+                        node.isWall = toggleWallState; // Set wall based on the initial action
+                        renderGrid(grid, gridElement);
+                    }
                 });
 
                 gridElement.appendChild(cell);
             });
+        });
+
+        // Track mouse up event globally to stop wall placement
+        document.addEventListener('mouseup', () => {
+            isMouseDown = false;
+            toggleWallState = null;
         });
     }
 
@@ -166,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function runAStar(grid, startNode, targetNode, delay, allowDiagonals) {
         let openSet = [startNode];
         let closedSet = [];
-        
+
         startNode.g = 0;
         startNode.f = heuristic(startNode, targetNode);
 
