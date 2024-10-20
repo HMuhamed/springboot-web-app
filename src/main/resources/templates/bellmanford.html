@@ -1,105 +1,83 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bellman-Ford Pathfinding Visualization</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-family: Arial, sans-serif;
-        }
 
-        /* Grid styles */
-        #grid {
-            display: grid;
-            grid-template-columns: repeat(20, 30px);
-            grid-template-rows: repeat(20, 30px);
-            gap: 2px;
-        }
-        .cell {
-            width: 30px;
-            height: 30px;
-            border: 2px solid black;
-        }
-h1 {
-  color:  rgb(149, 69, 53)  ; 
-font-size: 2em; 
-  text-align: center; 
-  margin-bottom: 20px; 
-}  
-        .start { background-color: blue; }
-        .target { background-color: red; }
-        .wall { background-color: black; }
-        .path { background-color: green; }
-        .visited { background-color: yellow; }
+    <title>Bellman-Ford Algorithm</title>
 
-        /* Button styles */
-        .visualize-btn {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: rgb(188, 143, 143);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            margin: 10px; /* Add margin to separate buttons */
-        }
+    <link rel="stylesheet" href="/css/styles.css">
 
-        .visualize-btn:hover {
-            background-color: rgb(165, 90, 90);
-            transform: scale(1.05);
-        }
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 
-        .visualize-btn:active {
-            background-color: rgb(150, 70, 70);
-            transform: scale(0.95);
-        }
-
-        /* Controls container */
-        #controls {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        /* Other controls */
-        label {
-            margin-left: 10px;
-        }
-
-        input[type="range"] {
-            margin-left: 10px;
-        }
-
-    </style>
 </head>
+
 <body>
 
-    <h1>Bellman-Ford Pathfinding Visualization</h1>
+    <header>
 
-    <!-- Controls -->
-    <div id="controls">
-        <button id="startBtn" class="visualize-btn">Start Bellman-Ford</button>
-        <button id="resetBtn" class="visualize-btn">Reset Grid</button>
-        <button id="generateMazeBtn" class="visualize-btn">Generate Maze</button>
+        <h1>Bellman-Ford Algorithm</h1>
 
-        <label for="gridSize">Grid Size:</label>
-        <input type="range" id="gridSize" min="10" max="40" value="10">
-        <span id="gridSizeValue">10x10</span>
+    </header>
 
-        <label for="delay">Delay (ms):</label>
-        <input type="range" id="delay" min="0" max="100" value="30">
-        <span id="delayValue">30ms</span>
 
-        <input type="checkbox" id="allowDiagonals"> Allow Diagonal Movement
-    </div>
 
-    <!-- Grid -->
-    <div id="grid"></div>
+    <section class="description">
 
-    <script src="js/bfs.js"></script>
+        <p>
+
+            The Bellman-Ford algorithm is designed to find the shortest paths from a single source vertex to all other vertices in a weighted graph. It is particularly useful for graphs that contain negative weight edges.
+
+        </p>
+
+        <p>
+
+            Unlike Dijkstra's algorithm, the Bellman-Ford algorithm can handle graphs with negative weights by detecting negative weight cycles. It iterates over all edges up to |V| - 1 times, where |V| is the number of vertices in the graph, ensuring that the shortest path is accurately computed even with negative weights.
+
+        </p>
+
+        <p>
+
+            <strong>Key Features:</strong>
+
+            <ul>
+
+                <li>Handles negative weight edges and detects negative weight cycles.</li>
+
+                <li>Provides a reliable solution for graphs with negative weights.</li>
+
+                <li>Less efficient compared to Dijkstra's algorithm for graphs with non-negative weights.</li>
+
+            </ul>
+
+        </p>
+
+    </section>
+
+
+
+   <section class="visualization">
+
+    <a href="/bellmanford" class="visualize-btn">Visualize Bellman-Ford</a>
+
+</section>
+
+
+
+    <footer>
+
+        <p>&copy; 2024 Algorithm Visualizer. All Rights Reserved.</p>
+
+    </footer>
+
+
+
+    <script src="js/visualization.js"></script>
+
 </body>
+
 </html>
